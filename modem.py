@@ -48,6 +48,14 @@ class Client:
         self.p.write(text)
         self.p.flush()
 
+    def getch(self):
+        self.p.timeout(200)
+        return self.p.read(1)
+
+    def getline(self):
+        self.p.timeout(200)
+        return self.p.readline()
+
     def hangup(self):
         time.sleep(1)
         self.p.write("+++")

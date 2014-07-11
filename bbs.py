@@ -2,11 +2,19 @@ import serial
 import argparse
 import local
 import modem
+import menu
 
-def run_bbs(client):
-    lines = open("splash.txt").readlines()
+def dump_file(client,path):
+    lines = open(path).readlines()
     for line in lines:
         client.send(line)
+
+main = menu.Menu(None,"BBS ROOT")
+main.add_entry("Read MOTD",lambda c:dump_file(c,"motd.txt"))
+
+def run_bbs(client):
+    dump_file(client,"splash.txt")
+    main.run(client)
     client.hangup()
 
 if __name__=='__main__':

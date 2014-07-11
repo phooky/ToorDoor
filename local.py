@@ -18,6 +18,13 @@ class Client:
     def send(self,text):
         sys.stdout.write(text)
 
+    def getch(self):
+        sys.stdin.flush()
+        return sys.stdin.read(1)
+
+    def getline(self):
+        return sys.stdin.readline()
+
     def hangup(self):
         sys.stdout.write("HANGUP\n")
 
