@@ -1,5 +1,6 @@
 import serial
 import re
+import time
 
 connectre = re.compile("CONNECT ([0-9]+)")
 
@@ -49,12 +50,18 @@ class Client:
         self.p.flush()
 
     def getch(self):
-        self.p.timeout(200)
+        self.p.timeout = 200
         return self.p.read(1)
 
     def getline(self):
-        self.p.timeout(200)
-        return self.p.readline()
+        self.p.timeout = 200
+        m = ""
+        while 1:
+            c = self.getch()
+            self.send(c)
+            m = m + c
+            if len(c) == 0 or c == '\n':
+                return m
 
     def hangup(self):
         time.sleep(1)

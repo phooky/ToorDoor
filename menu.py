@@ -27,5 +27,5 @@ class Menu:
                 if choice < (len(self.entries)+1):
                     self.entries[choice-1][1](client)
                     self.display(client)
-            except Exception as e:
+            except ValueError as e:
                 pass #print e

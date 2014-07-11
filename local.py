@@ -1,4 +1,6 @@
 import sys
+import time
+import os
 
 class Client:
     def __init__(self):
@@ -19,11 +21,12 @@ class Client:
         sys.stdout.write(text)
 
     def getch(self):
-        sys.stdin.flush()
-        return sys.stdin.read(1)
+        c = sys.stdin.read(1)
+        return c
 
     def getline(self):
-        return sys.stdin.readline()
+        l = sys.stdin.readline()
+        return l
 
     def hangup(self):
         sys.stdout.write("HANGUP\n")
