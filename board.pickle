@@ -52,7 +52,32 @@ p22
 (dp23
 g6
 (lp24
-sg20
-S'L33t h4xx0ring!!1!'
+(iboard
+Post
 p25
+(dp26
+g10
+S'Post your l33t3st h4x, cr4x, and d4d3 murphz HERE\n\nif you are a super leet hacker find our hidden zb\x7fmodem download\n\n'
+p27
+sg12
+S'h4xm4st3r'
+p28
+sg14
+g15
+((I2014
+I7
+I11
+I17
+I19
+I28
+I4
+I192
+I1
+tp29
+(dp30
+tp31
+Rp32
+sbasg20
+S'L33t h4xx0ring!!1!'
+p33
 sbasb.

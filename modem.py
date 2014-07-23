@@ -1,11 +1,16 @@
 import serial
 import re
 import time
+import sys
 
 connectre = re.compile("CONNECT ([0-9]+)")
 
 class TimeoutError(RuntimeError):
     pass
+
+class NoCarrierError(RuntimeError):
+    pass
+
 
 class Client:
     def __init__(self,port):
@@ -45,16 +50,27 @@ class Client:
         except TimeoutError:
             return False
 
-    def send(self,text):
-        self.p.write(text)
+    def send(self,text,norepl=False):
+        if norepl:
+            self.p.write(text)
+        else:
+            self.p.write(text.replace('\n','\r\n'))
         self.p.flush()
 
     def getch(self):
-        self.p.timeout = 200
-        return self.p.read(1)
+        self.p.timeout = 160
+        c= self.p.read(1)
+        #sys.stdout.write("{0:02x} {1}".format(ord(c[0]),c))
+        #sys.stdout.flush()
+        if len(c) == 0:
+            print "Timeout on read!"
+            raise TimeoutError()
+        if ord(c[0]) == 0xff:
+            print "Lost carrier!"
+            raise NoCarrierError()
+        return c
 
     def getline(self):
-        self.p.timeout = 200
         m = ""
         while 1:
             c = self.getch()

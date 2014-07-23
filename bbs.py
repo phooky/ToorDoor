@@ -55,6 +55,7 @@ if __name__=='__main__':
                 run_bbs(client)
             except Exception as e:
                 print "GOT EXCEPT. SORRY",repr(e),e
+                client.hangup()
         else:
             print "Lost call!"
         print "Ending at",time.strftime("%D %H:%M",time.localtime())
